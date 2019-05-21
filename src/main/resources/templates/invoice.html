@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="css/invoice.css">
+
+    <style>
+        body {
+            font-family: FuturaLT-Book !important;
+        }
+    </style>
+</head>
+<body>
+
+<div th:each="booking:${booking}">
+    <header class="clearfix">
+        <div id="logo">
+            <img src="/img/core-img/logo.png">
+        </div>
+        <div id="company">
+            <h2 class="name">Green Hotel</h2>
+            <div>5 Joel Ogunnaike, Ikeja, Nigeria</div>
+            <div>(602) 519-0450</div>
+            <div><a href="#">greenhotel@example.com</a></div>
+        </div>
+    </header>
+    <main>
+        <div id="details" class="clearfix">
+            <div id="client">
+                <div class="to">RECEIPT TO:</div>
+                <h2 class="name" th:text="${booking.firstName} +' '+ ${booking.lastName}">First Name</h2>
+                <!--<div class="address">796 Silver Harbour, TX 79273, US</div>-->
+                <div class="email"><a th:text="${booking.email}">E-mail</a></div>
+            </div>
+            <div id="invoice">
+                <h1 th:text="'RECEIPT '+${booking.id}">INVOICE 3-2-1</h1>
+                <div class="date" th:text="'Duration: '+${booking.dates}">Check In & Check Out Date</div>
+                <!--<div class="date" th:text="'&nbsp; Date Out: '+${booking.checkOut}">Check Out Date</div>-->
+            </div>
+        </div>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th class="total">ROOM TYPE</th>
+                <th class="qty">ADULT(S)</th>
+                <th class="qty">CHILDREN</th>
+                <th class="qty">ROOM PRICE</th>
+                <th class="total">TOTAL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="total" style="text-align: center" th:text="${booking.roomType}"></td>
+                <td class="qty" style="text-align: center" th:text="${booking.adults}"></td>
+                <td class="qty" style="text-align: center" th:text="${booking.children}"></td>
+                <td class="qty" style="text-align: center" th:text="'$'+${booking.roomPrice}"></td>
+                <td class="total" style="text-align: center" th:text="'$'+${booking.roomPrice}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="2">SUBTOTAL</td>
+                <td th:text="'$'+${booking.roomPrice}">$5,200.00</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="2">GRAND TOTAL</td>
+                <td th:text="'$'+${booking.roomPrice}">$6,500.00</td>
+            </tr>
+            </tfoot>
+        </table>
+        <div id="thanks">Thank you!</div>
+        <div id="notices">
+            <div>NOTICE:</div>
+            <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+        </div>
+    </main>
+    <footer>
+        Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>The Palatin - Hotel &amp; Resort Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+<!-- Preloader -->
+<div class="preloader d-flex align-items-center justify-content-center">
+    <div class="cssload-container">
+        <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+    </div>
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="palatinNav">
+
+                    <!-- Nav brand -->
+                    <a href="index" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li class="active"><a href="index">Home</a></li>
+                                <li><a href="about-us">About Us</a></li>
+                                <li><a href="#">Pages</a>
+                                    <ul class="dropdown">
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="about-us">About Us</a></li>
+                                        <li><a href="services">Services</a></li>
+                                        <li><a href="rooms">Rooms</a></li>
+                                        <li><a href="contact">Contact</a></li>
+                                        <li><a href="elements">Elements</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="signup">Sign Up</a></li>
+                                <li><a href="services">Services</a></li>
+                                <li><a href="contact">Contact</a></li>
+                            </ul>
+
+                            <!-- Button -->
+                            <div class="menu-btn">
+                                <a href="#" class="btn palatin-btn">Make a Reservation</a>
+                            </div>
+
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+<!-- ##### Rooms Area Start ##### -->
+<section style="padding-top: 200px" class="rooms-area section-padding-0-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+                <div class="section-heading text-center">
+                    <div class="line-"></div>
+                    <h2>Choose a room</h2>
+                    <p>Select a room from a variety of excellent choices, all designed to suit your every need &amp;
+                        comfort.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Single Rooms Area -->
+            <div class="col-12 col-md-6 col-lg-4" th:each="room:${rooms}">
+                <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
+                    <!-- Thumbnail -->
+                    <div class="bg-thumbnail bg-img">
+                        <img class="bg-img bg-thumbnail" th:src="@{${room.imagePath}}"/>
+                    </div>
+                    <!-- Price -->
+                    <p class="price-from" th:text="'$'+${room.price}+'/night'"></p>
+                    <!-- Rooms Text -->
+                    <div class="rooms-text">
+                        <div class="line"></div>
+                        <h4 th:text="${room.roomTitle}"></h4>
+                        <p th:text="${room.roomDesc}"></p>
+                    </div>
+                    <form th:action="@{/booking}" method="post">
+                        <input name="rTitle" th:value="${room.roomTitle}" type="hidden">
+                        <input name="roomId" th:value="${room.id}" type="hidden">
+                        <input name="rPrice" th:value="${room.price}" type="hidden">
+                        <input name="dates" th:value="${dates}" type="hidden">
+                        <input name="adult" th:value="${adult}" type="hidden">
+                        <input name="children" th:value="${children}" type="hidden">
+
+                        <!-- Book Room -->
+                        <button class="book-room-btn btn palatin-btn">Book Room</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <!-- Pagination -->
+                <div class="pagination-area wow fadeInUp" data-wow-delay="400ms">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="#">01.</a></li>
+                            <li class="page-item"><a class="page-link" href="#">02.</a></li>
+                            <li class="page-item"><a class="page-link" href="#">03.</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ##### Rooms Area End ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+
+            <!-- Footer Widget Area -->
+            <div class="col-12 col-lg-5">
+                <div class="footer-widget-area mt-50">
+                    <a href="#" class="d-block mb-5"><img src="img/core-img/logo.png" alt=""></a>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                        sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
+                        finibus. </p>
+                </div>
+            </div>
+
+            <!-- Footer Widget Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="footer-widget-area mt-50">
+                    <h6 class="widget-title mb-5">Find us on the map</h6>
+                    <img src="img/bg-img/footer-map.png" alt="">
+                </div>
+            </div>
+
+            <!-- Footer Widget Area -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="footer-widget-area mt-50">
+                    <h6 class="widget-title mb-5">Subscribe to our newsletter</h6>
+                    <form action="#" method="post" class="subscribe-form">
+                        <input type="email" name="subscribe-email" id="subscribeemail" placeholder="Your E-mail">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Copywrite Text -->
+            <div class="col-12">
+                <div class="copywrite-text mt-30">
+                    <p><a href="#">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                                                            aria-hidden="true"></i> by <a
+                            href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- ##### Footer Area End ##### -->
+
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="js/bootstrap/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<!-- All Plugins js -->
+<script src="js/plugins/plugins.js"></script>
+<!-- Active js -->
+<script src="js/active.js"></script>
+</body>
+
+</html>

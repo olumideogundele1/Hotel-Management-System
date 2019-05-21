@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="https://thymeleaf.org" >
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>The Palatin - Hotel &amp; Resort Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        input[type=text] {
+            border: none;
+            border-bottom: 1px solid black;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            outline: none;
+        }
+
+        input[type=email] {
+            border: none;
+            border-bottom: 1px solid black;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            outline: none;
+        }
+
+        input[type=password] {
+            border: none;
+            border-bottom: 1px solid black;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            outline: none;
+        }
+
+        input[type=number] {
+            border: none;
+            border-bottom: 1px solid black;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            outline: none;
+        }
+
+        .form-group {
+            margin-right: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- ##### Breadcumb Area Start ##### -->
+
+<section style="height: 200px" class="admin breadcumb-area d-flex align-items-center justify-content-center">
+    <div class="bradcumbContent">
+        <h2>Create Room</h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+
+<div style="display: block; text-align: center; margin-bottom: 150px;  ">
+    <form th:action="@{/addRoom}" th:object="${room}" method="post" style="border:2px solid #cb8670; display: inline-block; margin-left: auto; margin-right: auto; text-align: left; padding-top: 30px; padding-bottom: 30px; padding-left: 45px; ">
+        <h3 style="padding-bottom: 30px; text-align: center">CREATE A ROOM</h3>
+        <div class="form-group">
+            <div class="form-row col-md-12">
+                <div class="form-group col-md-2">
+                    <label for="num">Room no</label>
+                    <input class="form-control" type="text" id="num" th:field="*{roomNum}" required>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="title">Room Title</label>
+                    <input class="form-control" type="text" id="title" th:field="*{roomTitle}"  required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="price">Room Price</label>
+                    <input class="form-control" type="text" id="price" th:field="*{price}" required>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="desc">Room Description</label>
+                <textarea class="form-control" id="desc" rows="6" th:field="*{roomDesc}" required></textarea>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="path">Image Path</label>
+                <input class="form-control" type="text" id="path" th:field="*{imagePath}"  required>
+            </div>
+            <!--<div class="col-md-6 form-group ">-->
+                <!--<input type="file" class="custom-file-input" id="customFile" name="filename" th:field="*{imagePath}">-->
+                <!--<label style="left: 15px;" class="custom-file-label" for="customFile">Select Room Image</label>-->
+            <!--</div>-->
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="js/bootstrap/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<!-- All Plugins js -->
+<script src="js/plugins/plugins.js"></script>
+<!-- Active js -->
+<script src="js/active.js"></script>
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+</body>
+
+</html>

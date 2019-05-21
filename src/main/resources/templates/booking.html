@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>The Palatin - Hotel &amp; Resort Template</title>
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" th:href="@{style.css}">
+    <!--Bootstrap Stylesheet-->
+    <!--<link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />-->
+    <!--Bootstrap Date Range Picker Stylesheet-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+
+    <style>
+        input[type=text] {
+            border: none;
+            border-bottom: 1px solid black;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            outline: none;
+        }
+
+        input[type=email] {
+            border: none;
+            border-bottom: 1px solid black;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            outline: none;
+        }
+
+        input[type=password] {
+            border: none;
+            border-bottom: 1px solid black;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            outline: none;
+        }
+
+        input[type=number] {
+            border: none;
+            border-bottom: 1px solid black;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            outline: none;
+        }
+
+        .form-group {
+            margin-right: auto;
+        }
+
+        .daterangepicker {
+            background-color: #fff;
+            border-color: transparent;
+            /*color: #999;*/
+            font-family: FuturaLT-Book !important;
+        }
+
+        .daterangepicker td.in-range {
+            background-color: #cb8670;
+            border-color: transparent;
+            color: #000;
+            border-radius: 0;
+        }
+
+
+        .daterangepicker td.today.active {
+            background-color: #cb8670;
+        }
+
+        .daterangepicker td.active {
+            background-color: #cb8670;
+            color: #000;
+        }
+
+        .daterangepicker td.active.end-date.in-range.available {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .daterangepicker td.active.end-date.in-range.available:hover {
+            background-color: #000;
+            color: #cb8670;
+        }
+
+        .daterangepicker td.active.start-date.in-range.available:hover {
+            background-color: #000;
+            color: #cb8670;
+        }
+
+        .daterangepicker td.today.active.start-date.available:hover {
+            background-color: #000 !important;
+            color: #cb8670 !important;
+        }
+
+        .daterangepicker td.active.start-date.available:hover {
+            background-color: #000 !important;
+            color: #cb8670 !important;
+        }
+
+        .has-error {
+            color:  #ff0000;
+        }
+
+    </style>
+</head>
+
+<body>
+<!-- Preloader -->
+<div class="preloader d-flex align-items-center justify-content-center">
+    <div class="cssload-container">
+        <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+    </div>
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="palatinNav">
+
+                    <!-- Nav brand -->
+                    <a href="index" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li class="active"><a href="index">Home</a></li>
+                                <li><a href="about-us">About Us</a></li>
+                                <li><a href="services">Services</a></li>
+                                <li><a href="contact">Contact</a></li>
+                            </ul>
+
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area d-flex align-items-center justify-content-center">
+    <div class="bradcumbContent">
+        <h2>Booking & Check Out</h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+
+<!-- ##### Book Now Area Start ##### -->
+
+<div style="display: block; text-align: center; margin-bottom: 150px;  ">
+    <form th:action="@{/save-booking}" th:object="${booking}" method="post" style="border:2px solid #cb8670; display: inline-block; margin-left: auto; margin-right: auto; text-align: left; padding-top: 30px; padding-bottom: 30px; padding-left: 45px; ">
+       <div hidden="hidden">
+           <ul id="fieldErrors" th:if="${#fields.hasErrors('*')}">
+               <li  th:each="e : ${#fields.detailedErrors()}" th:text="${e.global} ? '*' : ${e.fieldName}"></li>
+           </ul>
+       </div>
+        <div hidden="hidden">
+            <ul id="fieldMessages" th:if="${#fields.hasErrors('*')}">
+                <li th:each="e : ${#fields.detailedErrors()}" th:text="${e.message}" th:attr="field = ${e.fieldName}"></li>
+            </ul>
+        </div>
+        <h3 style="padding-bottom: 30px; text-align: center">BOOKING DETAILS</h3>
+        <div class="form-group">
+            <div class="form-row col-md-12">
+                <div class=" form-group col-md-5">
+                    <label for="dates">Check In & Check Out*</label>
+                    <input class="form-control" type="text" name="dates" th:field="*{dates}" id="dates" placeholder="MM/DD/YYYY" th:value="${dates}">
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="adults">Adults*</label>
+                    <input class="form-control" type="text" id="adults" name="adults"  th:value="${adult}"/>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="children">Children*</label>
+                    <input class="form-control" type="text" id="children" name="children" th:value="${children}">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row col-md-12">
+                    <div class="form-group col-md-3" style="margin-right: 71px;">
+                        <label for="type">Room Type*</label>
+                        <input class="form-control" type="text" id="type" name="roomType" th:value="${rTitle}" readonly required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="price">Room Price*</label>
+                        <input class="form-control" type="text" id="price" name="roomPrice" th:value="${rPrice}" readonly required>
+                    </div>
+                </div>
+
+                <div class="form-row col-md-12">
+                    <div class="form-group col-md-3" style="margin-right: 71px;">
+                        <label for="fName">First Name*</label>
+                        <input style="padding-left: 0;" class="form-control" type="text" id="fName" name="firstName">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="lName">Last Name*</label>
+                        <input style="padding-left: 0;" class="form-control" type="text" id="lName" name="lastName">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="email">E-mail*</label>
+                        <input style="padding-left: 0;" class="form-control" type="text" id="email" name="email">
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-row col-md-12">
+                <div class="form-group col-md-4" style="margin-right: 0;border-right-width: 20px;;">
+                    <button type="submit" class="btn btn-primary">Complete Booking</button>
+                </div>
+                <div class="form-group col-md-3" style="margin-right: 100px; margin-left: 20px;" >
+                    <input class="form-control" style="padding-left: 0" type="hidden" id="id" name="roomId" th:value="${roomId}" readonly required>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<!--###### Book Now Are End    ######-->
+
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+<script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<!-- Popper js -->
+<script th:src="@{js/bootstrap/popper.min.js}"></script>
+<!-- Bootstrap js -->
+<script th:src="@{js/bootstrap/bootstrap.min.js}"></script>
+<!-- All Plugins js -->
+<script th:src="@{js/plugins/plugins.js}"></script>
+<!-- Active js -->
+<script th:src="@{js/active.js}"></script>
+
+
+<script>
+    $(document).ready(function () {
+        var start = moment();
+        var end = moment().add(29, 'days');
+        $('input[name="dates"]').daterangepicker({
+            minDate: start,
+            maxDate: end
+        });
+
+        $("#fieldErrors li").each(function(index,value){
+            fname = $(this).attr("fieldName");
+            msg = '<label for="'+fname+'">'+$(this).text()+'</label>'
+            field= $("[name='"+fname+"']");
+            field.closest(".form-group").addClass("alert-danger");
+        });
+
+        $('#fieldMessages li').each(function (index,value) {
+            fld = $(this).attr("field");
+            field = $("[name='" + fld +"']");
+            if(field.length > 0){
+                msg = '<label class="error" for="'+field+'">'+$(this).text()+'</label>'
+                $(field).after(msg);
+                $(field).closest(".form-group").addClass("has-error")
+            }
+        });
+
+        $
+
+    });
+</script>
+
+</body>
+
+</html>

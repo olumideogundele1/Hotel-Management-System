@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>The Palatin - Hotel &amp; Resort Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" th:href="@{style.css}">
+
+</head>
+
+<body>
+<!-- Preloader -->
+<div class="preloader d-flex align-items-center justify-content-center">
+    <div class="cssload-container">
+        <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+    </div>
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="palatinNav">
+
+                    <!-- Nav brand -->
+                    <a href="index" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+
+                            <!-- Button -->
+                            <div class="menu-btn">
+                                <a id="admin-su" href="#" class="btn palatin-btn">Create Admin</a>
+                                <a id="recep-su" href="#" class="btn palatin-btn">Create Receptionist</a>
+                                <a id="viewBookings" href="bookings-table" class="btn palatin-btn">View Bookings</a>
+                                <a id="viewRecep" href="recep-table" class="btn palatin-btn">View Receptionists</a>
+                                <a id="viewRooms" href="rooms-table" class="btn palatin-btn" style="top: 4px;">View Rooms</a>
+                            </div>
+
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+<!-- ##### Breadcumb Area Start ##### -->
+
+<section style="height: 200px; padding-top: 250px; padding-bottom: 115px;" class="breadcumb-area d-flex align-items-center justify-content-center">
+    <div class="bradcumbContent">
+        <h2>Admin Page</h2>
+    </div>
+</section>
+
+<div id="showPage">
+    <!--<div style="text-align: center" class="alert alert-success">-->
+        <!--<h2>Receptionist created successfully</h2>-->
+    <!--</div>-->
+</div>
+
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+<script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+<!-- Popper js -->
+<!--<script src="js/bootstrap/popper.min.js"></script>-->
+<!-- Bootstrap js -->
+<script th:src="@{js/bootstrap/bootstrap.min.js}"></script>
+<!-- All Plugins js -->
+<script th:src="@{js/plugins/plugins.js}"></script>
+<!-- Active js -->
+<script th:src="@{js/active.js}"></script>
+
+<!--<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>-->
+<!--<script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+<!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>-->
+<!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>-->
+
+<script>
+    $(document).ready(function(){
+        $("#admin-su").click(function() {
+            $.ajax({
+                url: "admin-signup",
+                success: function(data) {
+                    $("#showPage").html(data)
+                }
+            })
+        });
+
+        $("#recep-su").click(function() {
+            $.ajax({
+                url: "recep-signup",
+                success: function(data) {
+                    $("#showPage").html(data)
+                }
+            })
+        });
+    });
+</script>
+</body>
+
+</html>
